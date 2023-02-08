@@ -5,6 +5,8 @@
 
 FROM ubuntu:focal
 
+ENV LANG="C.UTF-8"
+
 COPY first-run-notice.txt /tmp/scripts/
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -12,8 +14,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && yes | unminimize 2>&1 
 
 # Install basic build tools
-RUN LANG="C.UTF-8" \
-    && apt-get update \
+RUN apt-get update \
     && apt-get upgrade -y \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         git \
